@@ -1,10 +1,10 @@
 <template>
   <Suspense>
-    <template>
-      <HoMe />
-    </template>
     <template #fallback>
       <SplashScreen />
+    </template>
+    <template #default>
+      <HoMe />
     </template>
   </Suspense>
 </template>
@@ -31,13 +31,13 @@ export default {
 html,
 body,
 .app {
-  min-height: 100vh;
-  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
 }
 
 * {
-  --brand-green: rgb(46, 219, 46);
-  --brand-blue: rgb(19, 106, 182);
+  --brand-green: rgb(31, 185, 31);
+  --brand-blue: rgb(16, 189, 198);
 }
 </style>

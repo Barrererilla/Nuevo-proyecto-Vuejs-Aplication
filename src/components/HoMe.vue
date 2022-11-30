@@ -1,9 +1,19 @@
 <template>
-  <div>Hello world</div>
+  <LayOut>
+    <template #head>
+      <HeaDer />
+    </template>
+  </LayOut>
 </template>
 
 <script>
+import HeaDer from "./HeaDer.vue";
+import LayOut from "./LayOut.vue";
+
 export default {
-  name: "HoMe",
+  components: {
+    HeaDer,
+    LayOut,
+  },
 };
 </script>

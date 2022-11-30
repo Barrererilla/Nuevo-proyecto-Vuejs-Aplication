@@ -1,32 +1,32 @@
 <template>
   <div class="splashscreen">
-    <img src="@/assets/paisaje-azul.svg" alt="logo" />
-    <h1 class=""><span>Splas</span>Screen</h1>
-    <div>
-      <p>Cargando ...</p>
-    </div>
+    <img src="@/assets/paisaje-azul.svg" alt="Logo" />
+    <h1><span>Cash</span>Flow</h1>
+    <div class="reload">Cargando...</div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .splashscreen {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
+  justify-content: center;
+  gap: 20px;
 }
-h1 {
+div h1 {
+  color: var(--brand-blue);
+  font-weight: bolder;
+  font-size: 40px;
+  margin: 0;
+}
+div h1 span {
   color: var(--brand-green);
 }
-h1 span {
+.reload {
   color: var(--brand-blue);
-}
-.splashscreen div {
-  position: relative;
-  top: 40px;
-}
-.splashscreen div p {
-  color: var(--brand-blue);
+  font-size: 20px;
+  margin-top: 50px;
 }
 </style>
