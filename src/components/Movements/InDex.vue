@@ -2,9 +2,13 @@
   <div class="movements">
     <div class="content">
       <MoVement
-        v-for="movement in movements"
-        :key="movement.id"
-        :title="movement.title"
+        v-for="{ id, title, description, amount } in movements"
+        :key="id"
+        :title="title"
+        :identificador="id"
+        :descripcion="description"
+        :amountMoney="amount"
+        @remove="removeChild"
       />
     </div>
   </div>
@@ -20,6 +24,10 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+const removeChild = (e) => {
+  console.log("Eliminado", e);
+};
 
 const { movements } = toRefs(props);
 </script>

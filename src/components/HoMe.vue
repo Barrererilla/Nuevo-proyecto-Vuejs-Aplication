@@ -42,7 +42,7 @@ export default {
           id: 0,
           title: "Movimientos 1",
           description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
+          amount: -5000,
         },
         {
           id: 1,
@@ -54,7 +54,7 @@ export default {
           id: 2,
           title: "Movimientos 3",
           description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
+          amount: -5000,
         },
         {
           id: 3,
@@ -66,7 +66,7 @@ export default {
           id: 4,
           title: "Movimientos 5",
           description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
+          amount: -5000,
         },
         {
           id: 5,
