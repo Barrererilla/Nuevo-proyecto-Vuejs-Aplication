@@ -31,7 +31,7 @@ const showMovements = ref(false);
 .movements,
 .resume {
   display: flex;
-  padding: 14px 0;
+  padding: 14px 20px;
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;

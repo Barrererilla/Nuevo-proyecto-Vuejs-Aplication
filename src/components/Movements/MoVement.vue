@@ -1,45 +1,45 @@
 <template>
   <div class="movement">
-    <div class="content">
+    <div class="contain">
       <h4>{{ title }}</h4>
       <p>{{ descripcion }}</p>
     </div>
     <div class="action">
       <img src="@/assets/basurero.svg" alt="borrar" @click="remove" />
-      <p :class="{ red: isNegative, green: !isNegative }">
-        {{ currencyamount }}
+      <p :class="{ red: !seeColorCurrency, green: seeColorCurrency }">
+        {{ currencyAmount }}
       </p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, toRefs, computed } from "vue";
+import { defineEmits, defineProps, toRefs, computed } from "vue";
 
 const currencyFormatter = new Intl.NumberFormat("es-CO", {
   style: "currency",
   currency: "COP",
 });
 
-const isNegative = computed(() => {
-  return amountMoney.value < 0;
+const currencyAmount = computed(() => {
+  return currencyFormatter.format(moneyAmount.value);
 });
 
-const currencyamount = computed(() => {
-  return currencyFormatter.format(amountMoney.value);
+const seeColorCurrency = computed(() => {
+  return moneyAmount.value > 0;
 });
 
 const props = defineProps({
   title: {
     type: String,
   },
-  identificador: {
-    type: Number,
-  },
   descripcion: {
     type: String,
   },
-  amountMoney: {
+  identificador: {
+    type: Number,
+  },
+  moneyAmount: {
     type: Number,
   },
 });
@@ -50,7 +50,7 @@ const remove = () => {
   emit("remove", identificador.value);
 };
 
-const { title, identificador, descripcion, amountMoney } = toRefs(props);
+const { title, descripcion, identificador, moneyAmount } = toRefs(props);
 </script>
 
 <style scoped>
@@ -78,9 +78,12 @@ h4,
 p {
   margin: 0;
   padding: 0;
+  color: rgb(43, 0, 0);
 }
 h4 {
   margin-bottom: 8px;
+  font-weight: bolder;
+  color: rgb(113, 111, 111);
 }
 .movement .action img {
   margin-bottom: 16px;

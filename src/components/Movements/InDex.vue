@@ -2,13 +2,13 @@
   <div class="movements">
     <div class="content">
       <MoVement
-        v-for="{ id, title, description, amount } in movements"
-        :key="id"
-        :title="title"
-        :identificador="id"
-        :descripcion="description"
-        :amountMoney="amount"
-        @remove="removeChild"
+        v-for="movement in movements"
+        :key="movement.id"
+        :title="movement.title"
+        :descripcion="movement.description"
+        :identificador="movement.id"
+        :moneyAmount="movement.amount"
+        @remove="seeRemove"
       />
     </div>
   </div>
@@ -18,16 +18,16 @@
 import MoVement from "./MoVement.vue";
 import { defineProps, toRefs } from "vue";
 
+const seeRemove = (e) => {
+  console.log("see remove: " + e);
+};
+
 const props = defineProps({
   movements: {
     type: Array,
     default: () => [],
   },
 });
-
-const removeChild = (e) => {
-  console.log("Eliminado", e);
-};
 
 const { movements } = toRefs(props);
 </script>
