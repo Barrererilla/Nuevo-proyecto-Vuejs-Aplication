@@ -20,7 +20,7 @@ export default {
 header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row;
   width: 100vw;
 }
