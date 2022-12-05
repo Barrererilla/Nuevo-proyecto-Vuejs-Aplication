@@ -11,7 +11,9 @@
         :date="dateLabel"
       >
         <template #graphic> Graphic </template>
-        <template #action>Action</template>
+        <template #action>
+          <AcTion />
+        </template>
       </Resume>
     </template>
     <template #movements>
@@ -24,6 +26,7 @@
 import HeaDer from "./HeaDer.vue";
 import LayOut from "./LayOut.vue";
 import Resume from "./Resume/InDex.vue";
+import AcTion from "./AcTion.vue";
 import MoVements from "./Movements/InDex.vue";
 
 export default {
@@ -31,6 +34,7 @@ export default {
     HeaDer,
     LayOut,
     Resume,
+    AcTion,
     MoVements,
   },
   data() {
