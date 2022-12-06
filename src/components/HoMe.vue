@@ -6,11 +6,13 @@
     <template #resume>
       <Resume
         :label="'Ahorro total'"
-        :amount="2000"
+        :amount="2000000"
         :fullAmount="5600600"
         :date="dateLabel"
       >
-        <template #graphic> Graphic </template>
+        <template #graphic>
+          <GraPhic :monthAmount="month" />
+        </template>
         <template #action>
           <AcTion />
         </template>
@@ -28,6 +30,7 @@ import LayOut from "./LayOut.vue";
 import Resume from "./Resume/InDex.vue";
 import AcTion from "./AcTion.vue";
 import MoVements from "./Movements/InDex.vue";
+import GraPhic from "./Resume/GraPhic.vue";
 
 export default {
   components: {
@@ -36,11 +39,13 @@ export default {
     Resume,
     AcTion,
     MoVements,
+    GraPhic,
   },
   data() {
     return {
       null: null,
-      dateLabel: "1/12/22",
+      dateLabel: "5 de Diciembre del 2022",
+      month: [500, 400, 300, 500, -300, -100, 0, -300, 300, 400],
       movementsArray: [
         {
           id: 0,

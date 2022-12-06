@@ -52,6 +52,7 @@ const showMovements = ref(false);
   flex-direction: column;
   border-radius: 24px;
   gap: 20px;
+  background-color: white;
 }
 .movements .historial {
   width: 100vw;
