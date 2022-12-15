@@ -1,25 +1,25 @@
 <template>
-  <LayOut>
+  <LayOut @eliminarLista="removerArray">
     <template #head>
       <HeaDer />
     </template>
     <template #resume>
       <Resume
         :label="'Ahorro total'"
-        :amount="2000000"
-        :fullAmount="5600600"
+        :fullAmount="totalAmount"
+        :amount="monto"
         :date="dateLabel"
       >
         <template #graphic>
-          <GraPhic :monthAmount="month" />
+          <GraPhic :monthAmount="month" @seleccion="select" />
         </template>
         <template #action>
-          <AcTion />
+          <AcTion @anadir="anadido" />
         </template>
       </Resume>
     </template>
     <template #movements>
-      <MoVements :movements="movementsArray" />
+      <MoVements :movements="movementsArray" @eliminar="eliminado" />
     </template>
   </LayOut>
 </template>
@@ -44,65 +44,68 @@ export default {
   data() {
     return {
       null: null,
-      dateLabel: "5 de Diciembre del 2022",
-      month: [500, 400, 300, 500, -300, -100, 0, -300, 300, 400],
-      movementsArray: [
-        {
-          id: 0,
-          title: "Movimientos 1",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: -5000,
-        },
-        {
-          id: 1,
-          title: "Movimientos 2",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
-        },
-        {
-          id: 2,
-          title: "Movimientos 3",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: -5000,
-        },
-        {
-          id: 3,
-          title: "Movimientos 4",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
-        },
-        {
-          id: 4,
-          title: "Movimientos 5",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: -5000,
-        },
-        {
-          id: 5,
-          title: "Movimientos 6",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
-        },
-        {
-          id: 6,
-          title: "Movimientos 7",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
-        },
-        {
-          id: 7,
-          title: "Movimientos 8",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
-        },
-        {
-          id: 8,
-          title: "Movimientos 9",
-          description: "Este puede ser un ingreso a un gasto",
-          amount: 5000,
-        },
-      ],
+      monto: null,
+      movementsArray: [],
     };
+  },
+  computed: {
+    month() {
+      const lastMonth = this.movementsArray
+        .filter((m) => {
+          const today = new Date();
+          const oldMonth = today.setDate(today.getDate() - 30);
+          return m.time > oldMonth;
+        })
+        .map((m) => m.amount);
+      return lastMonth.map((m, i) => {
+        const newArray = lastMonth.slice(0, i + 1);
+        console.log("Primer elemento de la lista: ", newArray);
+        return newArray.reduce((elementOne, movement) => {
+          return elementOne + movement;
+        }, 0);
+      });
+    },
+    totalAmount() {
+      return this.movementsArray.reduce((valorInicial, valoresArray) => {
+        return valorInicial + valoresArray.amount;
+      }, 0);
+    },
+    dateLabel() {
+      return "today";
+    },
+  },
+  mounted() {
+    const movimiento = JSON.parse(localStorage.getItem("movement"));
+    if (Array.isArray(movimiento)) {
+      this.movementsArray = movimiento.map((m) => {
+        return {
+          ...m,
+          time: new Date(m.time),
+        };
+      });
+    }
+  },
+  methods: {
+    anadido(valor) {
+      this.movementsArray.push(valor);
+      this.save();
+    },
+    eliminado(value) {
+      const index = this.movementsArray.findIndex((m) => m.id === value);
+      this.movementsArray.splice(index, 1);
+      this.save();
+    },
+    select(value) {
+      this.monto = value;
+    },
+    removerArray() {
+      const listValues = this.movementsArray.length;
+      this.movementsArray.splice(0, listValues);
+      this.save();
+    },
+    save() {
+      localStorage.setItem("movement", JSON.stringify(this.movementsArray));
+    },
   },
 };
 </script>

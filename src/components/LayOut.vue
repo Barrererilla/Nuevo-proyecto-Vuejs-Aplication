@@ -12,6 +12,7 @@
       </div>
       <div class="historial">
         <h1 class="title-parent">Historial</h1>
+        <button @click="eliminarLista">eliminar historial</button>
       </div>
       <div class="body" v-if="showMovements">
         <slot name="movements"></slot>
@@ -21,7 +22,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
+
+const emit = defineEmits(["eliminarLista"]);
+
+function eliminarLista() {
+  emit("eliminarLista");
+}
 
 const showMovements = ref(false);
 </script>
@@ -56,7 +63,18 @@ const showMovements = ref(false);
 }
 .movements .historial {
   width: 100vw;
-  padding-left: 20px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.movements .historial button {
+  border-radius: 40px;
+  border: 2px solid rgb(52, 189, 239);
+  width: 150px;
+  height: 40px;
+  color: rgb(52, 189, 239);
+  font-weight: bolder;
 }
 .movements .historial .title-parent {
   font-weight: bolder;

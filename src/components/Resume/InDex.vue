@@ -1,7 +1,9 @@
 <template>
-  <main>
+  <main class="parent-main">
     <p>{{ seeLabel }}</p>
-    <h1>{{ seeCurrencyAmount }}</h1>
+    <h1 :class="{ green: colorCurrency, red: !colorCurrency }">
+      {{ seeCurrencyAmount }}
+    </h1>
     <div class="graphic">
       <slot name="graphic"></slot>
     </div>
@@ -18,6 +20,9 @@ const currencyFormatter = new Intl.NumberFormat("es-CO", {
 });
 
 export default {
+  data() {
+    return {};
+  },
   props: {
     label: {
       type: String,
@@ -38,10 +43,13 @@ export default {
       return this.amount !== null ? this.amount : this.fullAmount;
     },
     seeLabel() {
-      return this.amount !== null ? this.label : this.date;
+      return this.amount !== null ? this.date : this.label;
     },
     seeCurrencyAmount() {
       return currencyFormatter.format(this.seeAmount);
+    },
+    colorCurrency() {
+      return this.fullAmount > 0;
     },
   },
 };
@@ -54,6 +62,7 @@ main {
   justify-content: center;
   align-items: center;
   width: 100vw;
+  margin-bottom: 60px;
 }
 main h1,
 p {
@@ -67,6 +76,12 @@ main h1 {
   color: green;
   font-weight: bolder;
   font-size: 50px;
+}
+.red {
+  color: rgb(148, 38, 38);
+}
+.green {
+  color: green;
 }
 .graphic {
   display: flex;

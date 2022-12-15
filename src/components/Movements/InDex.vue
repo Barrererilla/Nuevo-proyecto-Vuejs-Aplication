@@ -16,10 +16,11 @@
 
 <script setup>
 import MoVement from "./MoVement.vue";
-import { defineProps, toRefs } from "vue";
+import { defineProps, toRefs, defineEmits } from "vue";
 
+const emit = defineEmits(["eliminar"]);
 const seeRemove = (e) => {
-  console.log("see remove: " + e);
+  emit("eliminar", e);
 };
 
 const props = defineProps({
@@ -38,10 +39,7 @@ const { movements } = toRefs(props);
   padding: 0 8px;
   margin-bottom: 14px;
 }
-.title {
-  margin: 8px 16px 24px 16px;
-  color: var(--brand-blue);
-}
+
 .content {
   max-height: 68vh;
   display: flex;
